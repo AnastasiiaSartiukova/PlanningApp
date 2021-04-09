@@ -53,6 +53,15 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            style="@style/loginButton"
+            android:text="Registration"
+
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+
         <TextView
             style="@style/parent"
             android:textAlignment="center"

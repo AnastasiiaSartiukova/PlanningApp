@@ -2,7 +2,16 @@ package com.example.planning;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,21 +19,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class LogIn extends AppCompatActivity {
 
-    private Button log_in;
-    private Button register;
-    private Button read_db;
     private EditText etEmail;
     private EditText etPassword;
 
-    DatabaseHelper db_helper;
+    private GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInAccount account;
+
+    private int RC_SIGN_IN = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Button log_in;
+        Button register;
+        Button read_db;
+
+        GoogleSignInOptions gso;
+        SignInButton sign_in_google;
+
+        DatabaseHelper db_helper;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
@@ -61,6 +78,9 @@ public class LogIn extends AppCompatActivity {
                         if(current_email.equals(email) && current_password.equals(password)){
                             Log.d("mLog", "Log in success");
                             is_logged = true;
+
+                            openLogIn();
+
                             break;
                         }
 
@@ -78,6 +98,25 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+        //Google interaction
+        // If sign in via google pressed
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        sign_in_google = (SignInButton) findViewById(R.id.sign_in_button);
+
+        sign_in_google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+
+
+
         //If pressed Registration
         register = (Button) findViewById(R.id.cirRegButton);
 
@@ -93,7 +132,7 @@ public class LogIn extends AppCompatActivity {
 
                 db.insert("users", null, contentValues);
 
-
+                openRegistration();
             }
         });
 
@@ -129,5 +168,56 @@ public class LogIn extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            Intent intent = new Intent(this, SecondActivity.class);
+            startActivity(intent);
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
+        }
+    }
+
+    public void openLogIn(){
+        //Intent intent = new Intent(this, LogedInActivity.class);
+        //startActivity(intent);
+    }
+
+    public void openRegistration(){
+        //Intent intent = new Intent(this, RegistrationActivity.class);
+        //startActivity(intent);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }
