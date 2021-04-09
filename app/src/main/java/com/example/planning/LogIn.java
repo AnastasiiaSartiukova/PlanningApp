@@ -28,7 +28,7 @@ public class LogIn extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInAccount account;
 
-    private int RC_SIGN_IN = 0;
+    private int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,7 +196,7 @@ public class LogIn extends AppCompatActivity {
             account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent(LogIn.this, SecondActivity.class);
             startActivity(intent);
 
         } catch (ApiException e) {

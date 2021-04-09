@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +17,13 @@ public class SecondActivity extends AppCompatActivity {
     ImageView img;
     TextView email;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        img = findViewById(R.id.user_image);
+        //img = findViewById(R.id.user_image);
         email = findViewById(R.id.user_email);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
@@ -35,7 +35,9 @@ public class SecondActivity extends AppCompatActivity {
 
             email.setText(personEmail);
 
-            Glide.with(this).load(String.valueOf(personPhoto)).into(img);
+            Log.d("mLog", "Log in google");
+
+            //Glide.with(this).load(String.valueOf(personPhoto)).into(img);
         }
 
 
