@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LogIn extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Button log_in;
-        Button register;
+        TextView register;
         Button read_db;
 
         GoogleSignInOptions gso;
@@ -118,7 +119,7 @@ public class LogIn extends AppCompatActivity {
 
 
         //If pressed Registration
-        register = (Button) findViewById(R.id.cirRegButton);
+        register = findViewById(R.id.cirRegButton);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,8 +213,8 @@ public class LogIn extends AppCompatActivity {
     }
 
     public void openRegistration(){
-        //Intent intent = new Intent(this, RegistrationActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 
     private void signIn() {
