@@ -1,128 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context=".MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-
-
-    <LinearLayout
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_blue_light">
-        <ImageButton
-            android:orientation="horizontal"
-            android:id="@+id/settings"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/ic_settings"/>
+        android:layout_height="match_parent" />
 
 
-    </LinearLayout>
-
-    <ImageView
-        android:layout_marginTop="50dp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/ic_background_image"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
-
-    <LinearLayout
-        android:layout_marginTop="400dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/add_project"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_add_project"/>
-            <TextView
-                style="@android:style/Widget.Button"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                app:backgroundTint="#FFFFFF"
-                android:text="Create new project"
-                />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <ImageButton
-
-                android:id="@+id/project_list"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_project_list"/>
-
-            <TextView
-
-                style="@android:style/Widget.Button"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Projects"
-                android:textColor="@android:color/black"
-                app:backgroundTint="#FFFFFF" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="570dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/shared_project"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@mipmap/ic_share"/>
-            <TextView
-                style="@android:style/Widget.Button"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                app:backgroundTint="#FFFFFF"
-                android:text="Shared project"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

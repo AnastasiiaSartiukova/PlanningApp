@@ -40,15 +40,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ProjectListActivity"
-            android:label="@string/title_activity_project_list">
-            <intent-filter>
-                <action android:name=".ProjectListActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

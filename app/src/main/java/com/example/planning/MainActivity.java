@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,10 +27,8 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity{
 
-
-    private ImageButton project_list;
-    private ImageButton create_project;
-    private ImageButton shared_project;
+    private BottomNavigationItemView create_project;
+    private BottomNavigationItemView shared_project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,10 +36,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         //If pressed Create new project
-        create_project = (ImageButton) findViewById(R.id.add_project);
+        create_project = findViewById(R.id.add_project);
 
         create_project.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,20 +48,8 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        //If pressed Project list button
-        project_list = (ImageButton) findViewById(R.id.project_list);
-
-        project_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProjectList();
-            }
-        });
-
-
-
         //If pressed shared project button
-        shared_project = (ImageButton) findViewById(R.id.shared_project);
+        shared_project = findViewById(R.id.shared_project);
 
         shared_project.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +60,6 @@ public class MainActivity extends AppCompatActivity{
 
     public void createProject(){
         Intent intent = new Intent(this, CreateProjectActivity.class);
-        startActivity(intent);
-    }
-
-    public void openProjectList(){
-        Intent intent = new Intent(this, ProjectListActivity.class);
         startActivity(intent);
     }
 
