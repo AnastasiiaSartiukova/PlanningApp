@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity1"
+    tools:showIn="@layout/app_bar_main"
+    style="@style/parent.contentLayout"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/ic_edittext_bg"
+            android:hint="@string/text_hint"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="-40dp"
+            android:drawableEnd="@drawable/ic_back_arrow"
+            android:background="@drawable/search_button" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="56dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/viewParent.headerText"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="My Projects" />
+
+            <include layout="@layout/card_profile" />
+            <include layout="@layout/card_profile" />
+            <include layout="@layout/card_profile" />
+            <include layout="@layout/card_profile" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
