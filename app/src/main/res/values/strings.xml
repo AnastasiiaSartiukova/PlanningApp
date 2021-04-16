@@ -34,5 +34,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="text_hint"><b>Find project...</b></string>
+    <string name="bills">Bills</string>
+    <string name="lists">Lists</string>
+    <string name="invite">Invite</string>
+    <string name="members">3 members going</string>
+    <string name="date">Monday, 21.10, 14:00</string>
+    <string name="adress">Lazarenka, 40, Lviv, Ukraine</string>
+    <string name="project_name">Project Name</string>
 
 </resources>
