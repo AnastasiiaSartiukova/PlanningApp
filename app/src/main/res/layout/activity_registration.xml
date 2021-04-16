@@ -62,21 +62,4 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_blue_light">
-        <ImageButton
-            android:orientation="horizontal"
-            android:id="@+id/settings"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/ic_settings"/>
-
-
-    </LinearLayout>
-
-
 </RelativeLayout>

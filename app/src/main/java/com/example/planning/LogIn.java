@@ -197,7 +197,7 @@ public class LogIn extends AppCompatActivity {
             account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Intent intent = new Intent(LogIn.this, SecondActivity.class);
+            Intent intent = new Intent(LogIn.this, MainActivity.class);
             startActivity(intent);
 
         } catch (ApiException e) {
