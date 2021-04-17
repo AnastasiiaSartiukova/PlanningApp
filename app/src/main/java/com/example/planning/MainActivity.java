@@ -1,40 +1,41 @@
 package com.example.planning;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.LayoutInflater;
 import android.view.View;
-
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity{
 
+    private String name;
     private BottomNavigationItemView create_project;
     private BottomNavigationItemView shared_project;
+    private Button settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(getIntent().getStringExtra("Name") == null){
+            name = "Anastasia Srtiukova";
+        }
+        else{
+            name = getIntent().getStringExtra("Name");
+        }
+
+        //If setting button pressed
+        settings = findViewById(R.id.settings_button);
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { openSettings(name); }
+        });
 
         //If pressed Create new project
         create_project = findViewById(R.id.add_project);
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity{
     public void openLogIn(){
         Intent intent = new Intent(this, LogIn.class);
         startActivity(intent);
+    }
+
+    public void openSettings(String name){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.putExtra("Name", name);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override

@@ -80,7 +80,7 @@ public class LogIn extends AppCompatActivity {
                             Log.d("mLog", "Log in success");
                             is_logged = true;
 
-                            openLogIn();
+                            openLogIn(email);
 
                             break;
                         }
@@ -168,7 +168,6 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -207,9 +206,10 @@ public class LogIn extends AppCompatActivity {
         }
     }
 
-    public void openLogIn(){
-        //Intent intent = new Intent(this, LogedInActivity.class);
-        //startActivity(intent);
+    public void openLogIn(String name){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Name", name);
+        startActivity(intent);
     }
 
     public void openRegistration(){

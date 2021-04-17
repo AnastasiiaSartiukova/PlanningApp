@@ -75,7 +75,7 @@
         <Button
             android:id="@+id/cirReadButton"
             style="@style/loginButton"
-            android:visibility="gone"
+            android:visibility="visible"
             android:text="Read"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
