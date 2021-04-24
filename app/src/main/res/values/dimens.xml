@@ -22,4 +22,6 @@
     <dimen name="normalPadding">20dp</dimen>
     <dimen name="headerMoreTextSize">18sp</dimen>
 
+    <dimen name="form_app_bar_height">250dp</dimen>
+
 </resources>
