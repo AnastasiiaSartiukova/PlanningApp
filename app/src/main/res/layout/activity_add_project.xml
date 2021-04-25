@@ -30,7 +30,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txtName"
+                android:id="@+id/project_name"
                 style="@style/modifiedEditText"
                 android:hint="Project Name"
                 android:singleLine="true" />
@@ -50,7 +50,7 @@
 
             <EditText
                 style="@style/modifiedEditText"
-                android:id="@+id/editText_date"
+                android:id="@+id/project_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -58,14 +58,6 @@
                 android:hint="dd-MM-yyyy"
                 android:inputType="date" />
 
-            <Button
-                android:id="@+id/button_date"
-                android:background="@drawable/login_button_bk"
-                android:textColor="@color/whiteTextColor"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
-                android:text="Save"/>
         </LinearLayout>
 
         <DatePicker
@@ -109,7 +101,19 @@
             android:text="Add member"
             android:textColor="@color/whiteTextColor"
             android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/successAdded"
+            style="@style/parent"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textColor="@color/primaryTextColor"
+            android:text="Successful registration !"
+            android:layout_marginTop="@dimen/loginViewsMargin"/>
+
         <Button
+            android:id="@+id/save_project"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -1,13 +1,21 @@
 package com.example.planning;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -15,6 +23,13 @@ public class MainActivity extends AppCompatActivity{
     private BottomNavigationItemView create_project;
     private BottomNavigationItemView shared_project;
     private Button settings;
+
+    private LinearLayout parent;
+    private View child;
+    private DatabaseHelper db_helper;
+
+    private TextView tName;
+    private TextView tDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +43,47 @@ public class MainActivity extends AppCompatActivity{
         else{
             name = getIntent().getStringExtra("Name");
         }
+
+        //Adding all project to layout
+
+        parent = findViewById(R.id.project_list);
+
+        db_helper = new DatabaseHelper(this);
+        ContentValues contentValues = new ContentValues();
+        SQLiteDatabase db = db_helper.getWritableDatabase();
+
+
+        Cursor cursor = db.rawQuery("SELECT pName, pDate FROM projects", null);
+
+        if(cursor.moveToFirst()){
+
+            int name_index = cursor.getColumnIndex("pName");
+            int date_index = cursor.getColumnIndex("pDate");
+
+            do{
+                String current_name = cursor.getString(name_index);
+                String current_date = cursor.getString(date_index);
+
+                child = getLayoutInflater().inflate(R.layout.card_profile, null);
+
+                tName = child.findViewById(R.id.project_name);
+                tName.setText(current_name);
+
+                tDate = child.findViewById(R.id.project_date);
+                tDate.setText(current_date);
+
+                parent.addView(child);
+
+
+            } while(cursor.moveToNext());
+
+        }
+        else{
+            Log.d("mLog", "0 rows");
+        }
+
+        cursor.close();
+
 
         //If setting button pressed
         settings = findViewById(R.id.settings_button);

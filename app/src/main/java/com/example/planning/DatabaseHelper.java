@@ -14,22 +14,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "PlanningDB";
 
     private final String TABLE_NAME = "users";
+    private final String TABLE2_NAME = "projects";
+    private final String TABLE3_NAME = "membersInProject";
 
     private DatabaseHelper db;
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "LogIn", null, DB_VERSION);
+        super(context, "ProjectApp", null, DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "Create table if not exists " + TABLE_NAME + "(userID integer primary key, user_email text, user_password text)";
-        db.execSQL(query);
+
+        String logIn = "Create table if not exists " + TABLE_NAME + "(userID integer primary key, user_email text, user_password text)";
+        String projects = "Create table if not exists " + TABLE2_NAME + "(pID integer primary key, pName text, pDate text)";
+        String memberInProject = "Create table if not exists " + TABLE3_NAME + "(id integer primary key, member text, project_id integer)";
+
+        db.execSQL(logIn);
+        db.execSQL(memberInProject);
+        db.execSQL(projects);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table " + TABLE_NAME);
+        db.execSQL("drop table " + TABLE2_NAME);
+        db.execSQL("drop table " + TABLE3_NAME);
 
         onCreate(db);
     }
