@@ -89,6 +89,8 @@ public class LogIn extends AppCompatActivity {
 
                     if(!is_logged) {
                         Log.d("mLog", "Log in failed");
+                        TextView tip = findViewById(R.id.tipLogIn);
+                        tip.setVisibility(View.VISIBLE);
                     }
                 }
                 else{

@@ -21,6 +21,7 @@ public class CreateProjectActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private Button saveProject;
     private EditText projectDate;
+    private String name;
 
     private Button addMember;
 
@@ -30,6 +31,13 @@ public class CreateProjectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_project);
 
         DatabaseHelper db_helper;
+
+        if(getIntent().getStringExtra("Name") == null){
+            name = "Anonimus";
+        }
+        else{
+            name = getIntent().getStringExtra("Name");
+        }
 
         db_helper = new DatabaseHelper(this);
         ContentValues contentValues = new ContentValues();
@@ -60,12 +68,17 @@ public class CreateProjectActivity extends AppCompatActivity {
 
                 EditText eName = findViewById(R.id.project_name);
                 EditText eDate = findViewById(R.id.project_date);
+                EditText eCost = findViewById(R.id.project_cost);
 
-                String name = eName.getText().toString();
+                String pName = eName.getText().toString();
                 String date = eDate.getText().toString();
+                String cost = eCost.getText().toString();
+                String cName = name;
                 
-                contentValues.put("pName", name);
+                contentValues.put("pName", pName);
                 contentValues.put("pDate", date);
+                contentValues.put("pCost", cost);
+                contentValues.put("pCreator", cName);
 
                 db.insert("projects", null, contentValues);
 

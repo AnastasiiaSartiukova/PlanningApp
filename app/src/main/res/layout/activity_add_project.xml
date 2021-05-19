@@ -74,21 +74,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-130dp">
+            android:layout_marginTop="-100dp">
 
             <EditText
+                android:id="@+id/project_cost"
                 style="@style/modifiedEditText"
-                android:hint="Place"/>
+                android:hint="Project cost UAH"
+                android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <EditText
-                style="@style/modifiedEditText"
-                android:hint="Member email" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/login_button_bk"
-            android:text="OK"
+            android:text="Save"
             android:textColor="@color/whiteTextColor"
             android:layout_marginTop="20dp"/>
     </LinearLayout>

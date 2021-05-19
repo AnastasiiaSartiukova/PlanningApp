@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "PlanningDB";
 
     private final String TABLE_NAME = "users";
@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String logIn = "Create table if not exists " + TABLE_NAME + "(userID integer primary key, user_email text, user_password text)";
-        String projects = "Create table if not exists " + TABLE2_NAME + "(pID integer primary key, pName text, pDate text)";
+        String projects = "Create table if not exists " + TABLE2_NAME + "(pID integer primary key, pName text, pDate text, pCreator text, pCost integer)";
         String memberInProject = "Create table if not exists " + TABLE3_NAME + "(id integer primary key, member text, project_id integer)";
 
         db.execSQL(logIn);
