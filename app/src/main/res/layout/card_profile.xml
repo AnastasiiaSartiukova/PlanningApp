@@ -29,6 +29,7 @@
             android:text="Project Name" />
 
         <TextView
+            android:layout_marginTop="30dp"
             android:id="@+id/project_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,6 +37,16 @@
             android:textStyle="bold"
             android:textSize="12sp"
             android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/project_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cost"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#000"/>
+
     </LinearLayout>
 
     <androidx.cardview.widget.CardView

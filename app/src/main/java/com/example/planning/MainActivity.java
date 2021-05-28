@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
 
     private TextView tName;
     private TextView tDate;
+    private TextView tCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,14 +41,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(getIntent().getStringExtra("Name") == null){
-            name = "Anonimus";
-            is_logged = false;
-        }
-        else{
-            name = getIntent().getStringExtra("Name");
-            is_logged = true;
-        }
+        name = locateUserName();
+        is_logged = locateLogged(name);
 
         //Adding all project to layout where name in session = name as project creator
         add_all_projects_to_layout(name);
@@ -78,6 +76,27 @@ public class MainActivity extends AppCompatActivity{
         });
 
     }
+
+    private Boolean locateLogged(String name){
+        return !name.equals("Anonimus");
+    }
+
+    private String locateUserName(){
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+
+        if (acct != null){
+            return acct.getDisplayName();
+        }
+
+        if(getIntent().getStringExtra("Name") == null){
+            return "Anonimus";
+        }
+        else{
+            return getIntent().getStringExtra("Name");
+        }
+    }
+
 
     public void createProject(){
         Intent intent = new Intent(this, CreateProjectActivity.class);
@@ -122,19 +141,18 @@ public class MainActivity extends AppCompatActivity{
         ContentValues contentValues = new ContentValues();
         SQLiteDatabase db = db_helper.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT pName, pDate, pCreator FROM projects", null);
+        Cursor cursor = db.rawQuery("SELECT pName, pDate, pCreator, pCost FROM projects", null);
 
         if(cursor.moveToFirst()){
 
             int name_index = cursor.getColumnIndex("pName");
             int date_index = cursor.getColumnIndex("pDate");
             int creator_index = cursor.getColumnIndex("pCreator");
+            int cost_index = cursor.getColumnIndex("pCost");
 
             do{
 
                 String current_creator = cursor.getString(creator_index);
-
-                Log.d("mLog", name);
 
                 if(!current_creator.equals(name)){
                     continue;
@@ -142,6 +160,8 @@ public class MainActivity extends AppCompatActivity{
 
                 String current_name = cursor.getString(name_index);
                 String current_date = cursor.getString(date_index);
+                String current_cost = cursor.getString(cost_index);
+
 
                 child = getLayoutInflater().inflate(R.layout.card_profile, null);
 
@@ -149,7 +169,11 @@ public class MainActivity extends AppCompatActivity{
                 tName.setText(current_name);
 
                 tDate = child.findViewById(R.id.project_date);
-                tDate.setText(current_date);
+
+                tDate.setText("Date: " + current_date);
+
+                tCost = child.findViewById(R.id.project_cost);
+                tCost.setText("Cost: " + current_cost + " UAH");
 
                 parent.addView(child);
 

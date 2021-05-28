@@ -83,6 +83,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         tip.setVisibility(View.VISIBLE);
 
                     }
+                    else{
+                        Log.d("Log.m", "Already reg");
+                    }
                 }
                 else{
                     Log.d("mLog", "0 rows");
